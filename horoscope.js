@@ -1,6 +1,7 @@
 let input = document.querySelector('#inp');
 let radios = document.querySelectorAll('input[type="radio"]');
 let znak = document.querySelector('#znak');
+let horoscope_date = document.querySelector('#date');
 let pred = document.querySelector('#predict');
 
 let signs = [
@@ -84,9 +85,16 @@ input.addEventListener('keyup', function(e) {
             let end = formatDate(element.endPeriod);
             let check_date = formatDate(input.value);
             if (check_date >= start && check_date <= end) {
-                znak.innerHTML = element.sign + ': ';
+                znak.innerHTML = element.sign + '. ';
                 let predictions_length = Object.keys(predictions).length;
                 let rand = Math.floor(Math.random() * predictions_length);
+
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        horoscope_date.innerHTML = radio.value;
+                        console.log(radio.value)
+                    }
+                }
                 pred.innerHTML = predictions[rand];
             }
         }
